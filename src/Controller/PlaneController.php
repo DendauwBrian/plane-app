@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Plane;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,12 +15,12 @@ class PlaneController extends AbstractController
      */
     public function index()
     {
-        $planes = array(
-            "plane1" => "F-16"
-        );
+        $planes = $this->getDoctrine()->getRepository(Plane::class)->findAll();
 
         return $this->render('planes/index.html.twig', [
             "planes" => $planes
         ]);
     }
+
+    
 }
