@@ -51,7 +51,7 @@ class Plane
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $decommissioned;
+    private $decommissioned = false;
 
     public function __construct()
     {

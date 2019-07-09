@@ -45,6 +45,11 @@ class FlightController extends AbstractController
             ))
             ->add('plane', EntityType::class, array(
                 'class' => Plane::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('p')
+                        ->where('p.decommissioned = false')
+                        ->orderBy('p.model', 'ASC');
+                },
                 'choice_label' => 'model',
                 'attr' => array('class' => 'form-control')
             ))

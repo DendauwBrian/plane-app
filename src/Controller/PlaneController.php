@@ -90,14 +90,15 @@ class PlaneController extends AbstractController
     }
 
     /**
-     * @Route("/plane/delete/{id}", name="deleteplane")
+     * @Route("/plane/decommission/{id}", name="decommissionplane")
      */
-    public function delete(int $id)
+    public function decommission(int $id)
     {
         $plane = $this->getDoctrine()->getRepository(Plane::class)->find($id);
+        $plane->setDecommissioned(true);
 
         $em = $this->getDoctrine()->getManager();
-        $em->remove($plane);
+        $em->persist($plane);
         $em->flush();
 
         return $this->redirectToRoute('planes');
