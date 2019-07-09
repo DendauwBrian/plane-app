@@ -9,13 +9,14 @@
         </div>
         <div class="card-body">
             <p class="card-text">Uses a(n) {{ plane.engines }} engine.</p>
+            <p class="card-text">Is currently {% if not plane.decommissioned %} not {% endif %} decommissioned</p>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Has {{ timesFlown }} recorded flights.</li>
         </ul>
         <div class="card-body">
             <a href="/plane/edit/{{ plane.id }}" class="card-link">Edit</a>
-            <a href="/plane/delete/{{ plane.id }}" class="card-link">Delete</a>
+            <a href="/plane/decommission/{{ plane.id }}" class="card-link">Decommission</a>
         </div>
         {% if timesFlown %}
             <div class="card-footer text-muted">
