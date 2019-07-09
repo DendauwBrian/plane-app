@@ -8,5 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FlightController extends AbstractController
 {
-    //TODO
+    /**
+     * @Route("/flights", name="flights");
+     */
+    public function index()
+    {
+        return $this->render('flights/index.html.twig');
+    }
 }
