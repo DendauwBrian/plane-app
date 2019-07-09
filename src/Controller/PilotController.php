@@ -5,7 +5,6 @@ namespace App\Controller;
 
 use App\Entity\Pilot;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,12 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Validator\Constraints\Choice;
 
 class PilotController extends AbstractController
 {
     /**
-     * @Route("/pilots");
+     * @Route("/pilots", name="pilots");
      */
     public function index()
     {
@@ -31,7 +29,7 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/retired-pilots");
+     * @Route("/retired-pilots", name="retired-pilots");
      */
     public function retiredIndex()
     {
@@ -44,7 +42,7 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/create-pilot");
+     * @Route("/create-pilot", name="create-pilot");
      * Method({"GET", "POST"})
      */
     public function create(Request $request)
@@ -77,7 +75,7 @@ class PilotController extends AbstractController
             $em->persist($pilot);
             $em->flush();
 
-            return $this->redirectToRoute("pilots");
+            return $this->redirectToRoute('pilots');
         }
 
         return $this->render('pilots/create.html.twig', [
@@ -86,7 +84,7 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/pilot/{id}");
+     * @Route("/pilot/{id}", name="single-pilot");
      */
     public function read(int $id)
     {
@@ -96,7 +94,7 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/retire-pilot");
+     * @Route("/retire-pilot", name="retire-pilot");
      */
     public function retireList()
     {
@@ -108,7 +106,7 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("pilot/retire/{id}")
+     * @Route("pilot/retire/{id}", name="retire-single-pilot")
      */
     public function retire(int $id)
     {
