@@ -83,4 +83,16 @@ class FlightController extends AbstractController
             "flights" => $flights
         ));
     }
+
+    /**
+     * @Route("/flight/detail/{id}", name="flightdetails")
+     */
+    public function detail(int $id)
+    {
+        $flight = $this->getDoctrine()->getRepository(Flight::class)->find($id);
+
+        return $this->render("flights/details.html.twig", array(
+            "flight" => $flight
+        ));
+    }
 }
