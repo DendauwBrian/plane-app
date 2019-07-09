@@ -132,10 +132,14 @@ class PilotController extends AbstractController
     public function details(int $id)
     {
         $pilot = $this->getDoctrine()->getRepository(Pilot::class)->find($id);
-        // TODO get from DB
+
         $flights = $this->getDoctrine()->getRepository(Flight::class)->findBy(array('Pilot' => $pilot));
         $timesFlown = sizeof($flights);
-        $lastPlane = end($flights)->getPlane();
+        if ($timesFlown > 0) {
+            $lastPlane = end($flights)->getPlane();
+        } else {
+            $lastPlane = null;
+        }
 
         return $this->render('pilots/details.html.twig', [
             'pilot' => $pilot,

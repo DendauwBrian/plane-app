@@ -17,8 +17,10 @@
         <div class="card-body">
             <a href="/pilot/edit/{{ pilot.id }}" class="card-link">Edit</a>
         </div>
-        <div class="card-footer text-muted">
-            Last flight was with the {{ plane.model }}
-        </div>
+        {% if timesFlown %}
+            <div class="card-footer text-muted">
+                Last flight was with the {{ plane.model }}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

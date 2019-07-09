@@ -76,7 +76,11 @@ class PlaneController extends AbstractController
         // TODO get from DB
         $flights = $this->getDoctrine()->getRepository(Flight::class)->findBy(array('Plane' => $plane));
         $timesFlown = sizeof($flights);
-        $lastPilot = end($flights)->getPilot();
+        if ($timesFlown) {
+            $lastPilot = end($flights)->getPilot();
+        } else {
+            $lastPilot = null;
+        }
 
         return $this->render('planes/details.html.twig', [
             'pilot' => $lastPilot,
