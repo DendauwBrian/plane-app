@@ -48,6 +48,11 @@ class Plane
      */
     private $flights;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $decommissioned;
+
     public function __construct()
     {
         $this->flights = new ArrayCollection();
@@ -145,6 +150,18 @@ class Plane
                 $flight->setPlane(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDecommissioned(): ?bool
+    {
+        return $this->decommissioned;
+    }
+
+    public function setDecommissioned(?bool $decommissioned): self
+    {
+        $this->decommissioned = $decommissioned;
 
         return $this;
     }
