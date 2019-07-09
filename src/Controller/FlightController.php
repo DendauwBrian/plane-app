@@ -77,6 +77,10 @@ class FlightController extends AbstractController
      */
     public function history()
     {
-        return $this->render("flights/history.html.twig");
+        $flights = $this->getDoctrine()->getRepository(Flight::class)->findAll();
+
+        return $this->render("flights/history.html.twig", array(
+            "flights" => $flights
+        ));
     }
 }
