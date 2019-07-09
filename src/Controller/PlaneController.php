@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Flight;
 use App\Entity\Plane;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -73,15 +74,12 @@ class PlaneController extends AbstractController
     {
         $plane = $this->getDoctrine()->getRepository(Plane::class)->find($id);
         // TODO get from DB
-        $timesFlown = 100;
-        $lastPilot = 1;
-
-        //$plane = $this->getDoctrine()->getRepository(Plane::class)->find($id);
-
-        $pilot = array("name" => "dummy");
+        $flights = $this->getDoctrine()->getRepository(Flight::class)->findBy(array('Plane' => $plane));
+        $timesFlown = sizeof($flights);
+        $lastPilot = end($flights)->getPilot();
 
         return $this->render('planes/details.html.twig', [
-            'pilot' => $pilot,
+            'pilot' => $lastPilot,
             'timesFlown' => $timesFlown,
             "plane" => $plane
         ]);
