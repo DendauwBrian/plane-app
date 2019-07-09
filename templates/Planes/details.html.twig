@@ -15,6 +15,7 @@
         </ul>
         <div class="card-body">
             <a href="/plane/edit/{{ plane.id }}" class="card-link">Edit</a>
+            <a href="/plane/delete/{{ plane.id }}" class="card-link">Delete</a>
         </div>
         <div class="card-footer text-muted">
             Last pilot to fly was {{ pilot.name }} on {{ plane.lastflight|date('Y-m-d') }}

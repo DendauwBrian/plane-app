@@ -7,7 +7,6 @@ use App\Entity\Plane;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -86,5 +85,19 @@ class PlaneController extends AbstractController
             'timesFlown' => $timesFlown,
             "plane" => $plane
         ]);
+    }
+
+    /**
+     * @Route("/plane/delete/{id}", name="deleteplane")
+     */
+    public function delete(int $id)
+    {
+        $plane = $this->getDoctrine()->getRepository(Plane::class)->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($plane);
+        $em->flush();
+
+        return $this->redirectToRoute('planes');
     }
 }
