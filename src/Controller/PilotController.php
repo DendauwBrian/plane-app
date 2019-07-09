@@ -22,4 +22,12 @@ class PilotController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/create-pilot");
+     */
+    public function create()
+    {
+        return $this->render('pilots/create.html.twig');
+    }
+
 }
