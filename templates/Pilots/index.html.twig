@@ -1,7 +1,15 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Pilots</h1>
+    <h1 class="h1">Pilots</h1>
+    <hr/>
+    <div>
+        <a href="/create-pilot">Create a new Pilot</a> | <a href="/edit-pilot">Edit an existing Pilot</a> | <a
+                href="/retire-pilot">Retire an active Pilot</a>
+    </div>
+    <hr/>
+
+    <h2>Current active Pilots</h2>
     <ul>
         {% for pilot in pilots %}
             <li>{{ pilot }}</li>

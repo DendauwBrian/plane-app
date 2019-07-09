@@ -2,6 +2,14 @@
 
 {% block body %}
     <h1>Planes</h1>
+    <hr/>
+    <div>
+        <a href="/create-plane">Create a new Plane</a> | <a href="/edit-plane">Edit an existing Plane</a> | <a
+                href="/delete-plane">Delete a plane</a>
+    </div>
+    <hr/>
+
+    <h2>Current active Planes</h2>
     <ul>
         {% for plane in planes %}
             <li>{{ plane }}</li>
