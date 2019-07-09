@@ -118,6 +118,13 @@ class Pilot
         return $this;
     }
 
+    public function getFullName()
+    {
+        return $this->getRank() . ' '
+            . $this->getFirstname() . ' '
+            . $this->getLastname();
+    }
+
     /**
      * @return Collection|Flight[]
      */
