@@ -86,10 +86,21 @@ class PilotController extends AbstractController
     /**
      * @Route("/pilot/{id}", name="single-pilot");
      */
-    public function read(int $id)
+    public function details(int $id)
     {
+        $pilot = $this->getDoctrine()->getRepository(Pilot::class)->find($id);
+        // TODO get from DB
+        $timesFlown = 100;
+        $lastPlane = 1;
+
+        //$plane = $this->getDoctrine()->getRepository(Plane::class)->find($id);
+
+        $plane = array("model" => "F-16");
+
         return $this->render('pilots/details.html.twig', [
-            'id' => $id
+            'pilot' => $pilot,
+            'timesFlown' => $timesFlown,
+            "plane" => $plane
         ]);
     }
 
