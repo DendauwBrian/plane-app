@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="card mb-3">
+        <h3 class="card-header">{{ plane.model }}</h3>
+        <div class="card-body">
+            <h5 class="card-title">{{ plane.manufacturer }}</h5>
+            <h6 class="card-subtitle text-muted">Build on {{ plane.buildday|date('Y-m-d') }}</h6>
+        </div>
+        <div class="card-body">
+            <p class="card-text">Uses an {{ plane.engines }} engine.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Has {{ timesFlown }} recorded flights.</li>
+        </ul>
+        <div class="card-body">
+            <a href="/plane/edit/{{ plane.id }}" class="card-link">Edit</a>
+            <a href="/plane/delete/{{ plane.id }}" class="card-link">Delete</a>
+        </div>
+        <div class="card-footer text-muted">
+            Last pilot to fly was {{ pilot.fullname }} on {{ plane.lastflight|date('Y-m-d H:i:s') }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+{% block title %} Flight Details {% endblock %}
+{% block body %}
+    <div class="card mb-3">
+        <h3 class="card-header">{{ flight.flightts|date('Y-m-d H:i:s') }}</h3>
+        <div class="card-body">
+            <h5 class="card-title">{{ flight.pilot.fullname }}</h5>
+            <h6 class="card-subtitle text-muted">Using the {{ flight.plane.model }}</h6>
+        </div>
+        <div class="card-body">
+            <a href="/pilot/{{ flight.pilot.id }}" class="card-link">Pilot Info</a>
+            <a href="/plane/{{ flight.plane.id }}" class="card-link">Plane Info</a>
+        </div>
+    </div>
+{% endblock %}

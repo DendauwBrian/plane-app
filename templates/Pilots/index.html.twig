@@ -1,0 +1,66 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1 class="h1">Pilots</h1>
+    <hr/>
+    <div>
+        <a href="/pilot/new">Create a new Pilot</a> | <a href="/retire-pilot">Retire an active Pilot</a>
+    </div>
+    <hr/>
+
+    {% if retired_view %}
+        <h2>Current retired Pilots</h2>
+        {% if pilots %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Rank</th>
+                    <th>Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for pilot in pilots %}
+                    <tr>
+                        <td>{{ pilot.firstname }}</td>
+                        <td>{{ pilot.lastname }}</td>
+                        <td>{{ pilot.rank }}</td>
+                        <td><a href="/pilot/{{ pilot.id }}" class="btn btn-dark">Show</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <p>See <a href="/pilots">active pilots</a>.</p>
+        {% else %}
+            <p>There are no retired pilots. See <a href="/pilots">active pilots</a>.</p>
+        {% endif %}
+    {% else %}
+        <h2>Current active Pilots</h2>
+        {% if pilots %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Rank</th>
+                    <th>Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for pilot in pilots %}
+                    <tr>
+                        <td>{{ pilot.firstname }}</td>
+                        <td>{{ pilot.lastname }}</td>
+                        <td>{{ pilot.rank }}</td>
+                        <td><a href="/pilot/{{ pilot.id }}" class="btn btn-dark">Show</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <p>See <a href="/retired-pilots">retired pilots</a>.</p>
+        {% else %}
+            <p>There are no active pilots. See <a href="/retired-pilots">retired pilots</a>.</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}
