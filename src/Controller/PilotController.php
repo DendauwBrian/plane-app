@@ -4,6 +4,9 @@
 namespace App\Controller;
 
 use App\Entity\Pilot;
+use App\Entity\Flight;
+use App\Entity\Plane;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -130,17 +133,14 @@ class PilotController extends AbstractController
     {
         $pilot = $this->getDoctrine()->getRepository(Pilot::class)->find($id);
         // TODO get from DB
-        $timesFlown = 100;
-        $lastPlane = 1;
-
-        //$plane = $this->getDoctrine()->getRepository(Plane::class)->find($id);
-
-        $plane = array("model" => "F-16");
+        $flights = $this->getDoctrine()->getRepository(Flight::class)->findBy(array('Pilot' => $pilot));
+        $timesFlown = sizeof($flights);
+        $lastPlane = end($flights)->getPlane();
 
         return $this->render('pilots/details.html.twig', [
             'pilot' => $pilot,
             'timesFlown' => $timesFlown,
-            "plane" => $plane
+            "plane" => $lastPlane
         ]);
     }
 
