@@ -10,9 +10,26 @@
     <hr/>
 
     <h2>Current active Planes</h2>
-    <ul>
-        {% for plane in planes %}
-            <li>{{ plane }}</li>
-        {% endfor %}
-    </ul>
+    {% if planes %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Model</th>
+                <th>Manufacturer</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for plane in planes %}
+                <tr>
+                    <td>{{ plane }}</td>
+                    <td>{{ plane }}</td>
+                    <td><a href="/plane/1" class="btn btn-dark">Show</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>There are no planes available.</p>
+    {% endif %}
 {% endblock %}

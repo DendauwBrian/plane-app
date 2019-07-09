@@ -10,9 +10,26 @@
     <hr/>
 
     <h2>Current active Pilots</h2>
-    <ul>
-        {% for pilot in pilots %}
-            <li>{{ pilot }}</li>
-        {% endfor %}
-    </ul>
+    {% if pilots %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rank</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for pilot in pilots %}
+                <tr>
+                    <td>{{ pilot }}</td>
+                    <td>{{ pilot }}</td>
+                    <td><a href="/pilot/1" class="btn btn-dark">Show</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>There are no active pilots.</p>
+    {% endif %}
 {% endblock %}
