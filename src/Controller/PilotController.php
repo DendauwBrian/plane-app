@@ -42,7 +42,7 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/create-pilot", name="create-pilot");
+     * @Route("/pilot/new", name="newpilot");
      * Method({"GET", "POST"})
      */
     public function create(Request $request)

@@ -27,7 +27,7 @@ class PlaneController extends AbstractController
     }
 
     /**
-     * @Route("/create-plane", name="create-plane");
+     * @Route("/plane/new", name="newplane");
      */
     public function create(Request $request)
     {
