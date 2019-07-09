@@ -63,9 +63,6 @@ class PilotController extends AbstractController
                 "First Officer" => "First Officer",
                 "Captain" => "Captain"
             ), 'attr' => array("class" => "form-control")))
-            ->add("retired", ChoiceType::class, array('choices' => array(
-                "False" => false
-            ), 'attr' => array("class" => "form-control", "readonly" => true)))
             ->add("save", SubmitType::class, array('label' => 'Create', 'attr' => array("class" => "btn btn-primary")))
             ->getForm();
 

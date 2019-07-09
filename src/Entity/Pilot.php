@@ -41,7 +41,7 @@ class Pilot
     /**
      * @ORM\Column(type="boolean")
      */
-    private $retired;
+    private $retired = false;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Flight", mappedBy="Pilot")
