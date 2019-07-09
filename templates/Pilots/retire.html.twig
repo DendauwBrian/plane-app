@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h2>Retire an active pilot</h2>
+    {% if pilots %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Rank</th>
+                <th>Age</th>
+                <th>Retire</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for pilot in pilots %}
+                <tr>
+                    <td>{{ pilot.firstname }}</td>
+                    <td>{{ pilot.lastname }}</td>
+                    <td>{{ pilot.rank }}</td>
+                    <td>{{ pilot.age }}</td>
+                    <td><a href="/pilot/retire/{{ pilot.id }}" class="btn btn-dark">Retire</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>There are no active pilots.</p>
+    {% endif %}
+{% endblock %}

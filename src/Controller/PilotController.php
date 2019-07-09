@@ -3,8 +3,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Pilot;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Validator\Constraints\Choice;
 
 class PilotController extends AbstractController
 {
@@ -13,35 +22,67 @@ class PilotController extends AbstractController
      */
     public function index()
     {
-        $pilot = array(
-            "id" => 1,
-            "firstname" => "bobby",
-            "lastname" => "bobson",
-            "rank" => "Private"
-        );
-        $pilot2 = array(
-            "id" => 2,
-            "firstname" => "billy",
-            "lastname" => "billson",
-            "rank" => "Private"
-        );
-
-        $pilots = array(
-            "pilot1" => $pilot,
-            "pilot2" => $pilot2
-        );
+        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 0));
 
         return $this->render('pilots/index.html.twig', [
+            "retired_view" => false,
+            "pilots" => $pilots
+        ]);
+    }
+
+    /**
+     * @Route("/retired-pilots");
+     */
+    public function retiredIndex()
+    {
+        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 1));
+
+        return $this->render('pilots/index.html.twig', [
+            "retired_view" => true,
             "pilots" => $pilots
         ]);
     }
 
     /**
      * @Route("/create-pilot");
+     * Method({"GET", "POST"})
      */
-    public function create()
+    public function create(Request $request)
     {
-        return $this->render('pilots/create.html.twig');
+        $pilot = new Pilot();
+
+        $form = $this->createFormBuilder($pilot)
+            ->add("firstname", TextType::class, array('attr' => array("class" => "form-control")))
+            ->add("lastname", TextType::class, array('attr' => array("class" => "form-control")))
+            ->add("age", IntegerType::class, array('attr' => array("class" => "form-control", "min" => 18, "max" => 65)))
+            ->add("rank", ChoiceType::class, array('choices' => array(
+                "Private" => "Private",
+                "Flight Engineer" => "Flight Engineer",
+                "Second Officer" => "Second Officer",
+                "First Officer" => "First Officer",
+                "Captain" => "Captain"
+            ), 'attr' => array("class" => "form-control")))
+            ->add("retired", ChoiceType::class, array('choices' => array(
+                "False" => false
+            ), 'attr' => array("class" => "form-control", "readonly" => true)))
+            ->add("save", SubmitType::class, array('label' => 'Create', 'attr' => array("class" => "btn btn-primary")))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $pilot = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($pilot);
+            $em->flush();
+
+            return $this->redirectToRoute("pilots");
+        }
+
+        return $this->render('pilots/create.html.twig', [
+            "form" => $form->createView()
+        ]);
     }
 
     /**
@@ -52,6 +93,33 @@ class PilotController extends AbstractController
         return $this->render('pilots/details.html.twig', [
             'id' => $id
         ]);
+    }
+
+    /**
+     * @Route("/retire-pilot");
+     */
+    public function retireList()
+    {
+        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 0));
+
+        return $this->render('pilots/retire.html.twig', [
+            "pilots" => $pilots
+        ]);
+    }
+
+    /**
+     * @Route("pilot/retire/{id}")
+     */
+    public function retire(int $id)
+    {
+        $pilot = $this->getDoctrine()->getRepository(Pilot::class)->find($id);
+        $pilot->setRetired(true);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($pilot);
+        $em->flush();
+
+        return $this->redirectToRoute("pilots");
     }
 
 }

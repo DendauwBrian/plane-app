@@ -1,39 +1,8 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <form action="/create-pilot" class="form">
-        <fieldset>
-            <legend>Pilot</legend>
-            <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" class="form-control" id="firstName" aria-describedby="firstNameHelp"
-                       placeholder="First Name">
-                <small id="firstNameHelp" class="form-text text-muted">The first name of the pilot.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" id="lastName" aria-describedby="lastNameHelp"
-                       placeholder="Last Name">
-                <small id="lastNameHelp" class="form-text text-muted">The last name of the pilot.</small>
-            </div>
-
-            <div class="form-group">
-                <label for="rank">Rank</label>
-                <select class="form-control" id="rank">
-                    <option>Private</option>
-                    <option>Flight Engineer</option>
-                    <option>Second Officer</option>
-                    <option>First Officer</option>
-                    <option>Captain</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="age">Age</label>
-                <input type="number" class="form-control" id="age" min="18" max="65" value="18">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </fieldset>
-    </form>
+    <h2>Pilot</h2>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
 {% endblock %}
