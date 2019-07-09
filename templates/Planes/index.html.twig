@@ -22,9 +22,9 @@
             <tbody>
             {% for plane in planes %}
                 <tr>
-                    <td>{{ plane }}</td>
-                    <td>{{ plane }}</td>
-                    <td><a href="/plane/1" class="btn btn-dark">Show</a></td>
+                    <td>{{ plane.model }}</td>
+                    <td>{{ plane.manufacturer }}</td>
+                    <td><a href="/plane/{{ plane.id }}" class="btn btn-dark">Show</a></td>
                 </tr>
             {% endfor %}
             </tbody>
