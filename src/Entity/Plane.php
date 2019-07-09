@@ -34,7 +34,7 @@ class Plane
     /**
      * @ORM\Column(type="datetime")
      */
-    private $firstflight;
+    private $buildday;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -82,14 +82,14 @@ class Plane
         return $this;
     }
 
-    public function getFirstflight(): ?\DateTimeInterface
+    public function getBuildDay(): ?\DateTimeInterface
     {
-        return $this->firstflight;
+        return $this->buildday;
     }
 
-    public function setFirstflight(\DateTimeInterface $firstflight): self
+    public function setBuildDay(\DateTimeInterface $buildday): self
     {
-        $this->firstflight = $firstflight;
+        $this->buildday = $buildday;
 
         return $this;
     }
