@@ -100,4 +100,38 @@ class PlaneController extends AbstractController
 
         return $this->redirectToRoute('planes');
     }
+
+    /**
+     * @Route("/plane/edit/{id}", name="editplane");
+     */
+    public function edit(Request $request, int $id)
+    {
+        $plane = new Plane();
+        $plane = $this->getDoctrine()->getRepository(Plane::class)->find($id);
+
+        $form = $this->createFormBuilder($plane)
+            ->add("model", TextType::class, array('attr' => array('class' => 'form-control')))
+            ->add("manufacturer", TextType::class, array('attr' => array("class" => "form-control")))
+            ->add("engines", ChoiceType::class, array('choices' => array(
+                "Wankel" => "Wankel",
+                "Diesel" => "Diesel",
+                "Jet" => "Jet",
+                "Electric" => "Electric"
+            ), 'attr' => array("class" => "form-control")))
+            ->add("save", SubmitType::class, array('label' => 'Save', 'attr' => array("class" => "btn btn-primary")))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute('planes');
+        }
+
+        return $this->render('planes/edit.html.twig', [
+            "form" => $form->createView()
+        ]);
+    }
 }
