@@ -51,7 +51,7 @@ class PlaneController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $plane = $form->getData();
 
-            $dateTime = new \DateTime('@'.strtotime('now'));
+            $dateTime = new \DateTime('@' . strtotime('now'));
 
             $plane->setBuildDay($dateTime);
 
@@ -64,6 +64,27 @@ class PlaneController extends AbstractController
 
         return $this->render('planes/create.html.twig', [
             "form" => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/plane/{id}", name="singleplane")
+     */
+    public function detail(int $id)
+    {
+        $plane = $this->getDoctrine()->getRepository(Plane::class)->find($id);
+        // TODO get from DB
+        $timesFlown = 100;
+        $lastPilot = 1;
+
+        //$plane = $this->getDoctrine()->getRepository(Plane::class)->find($id);
+
+        $pilot = array("name" => "dummy");
+
+        return $this->render('planes/details.html.twig', [
+            'pilot' => $pilot,
+            'timesFlown' => $timesFlown,
+            "plane" => $plane
         ]);
     }
 }
