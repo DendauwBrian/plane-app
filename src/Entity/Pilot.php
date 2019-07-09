@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +42,16 @@ class Pilot
      * @ORM\Column(type="boolean")
      */
     private $retired;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Flight", mappedBy="Pilot")
+     */
+    private $flights;
+
+    public function __construct()
+    {
+        $this->flights = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -102,6 +114,37 @@ class Pilot
     public function setRetired(bool $retired): self
     {
         $this->retired = $retired;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Flight[]
+     */
+    public function getFlights(): Collection
+    {
+        return $this->flights;
+    }
+
+    public function addFlight(Flight $flight): self
+    {
+        if (!$this->flights->contains($flight)) {
+            $this->flights[] = $flight;
+            $flight->setPilot($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFlight(Flight $flight): self
+    {
+        if ($this->flights->contains($flight)) {
+            $this->flights->removeElement($flight);
+            // set the owning side to null (unless already changed)
+            if ($flight->getPilot() === $this) {
+                $flight->setPilot(null);
+            }
+        }
 
         return $this;
     }
