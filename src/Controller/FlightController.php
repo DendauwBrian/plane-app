@@ -55,10 +55,13 @@ class FlightController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $flight = $form->getData();
+            $plane = $flight->getPlane();
 
             $dateTime = new \DateTime('@' . strtotime('now'));
+            $plane->setLastflight($dateTime);
 
             $flight->setFlightts($dateTime);
+            $flight->setPlane($plane);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($flight);

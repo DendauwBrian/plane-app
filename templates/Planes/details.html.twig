@@ -18,7 +18,7 @@
             <a href="/plane/delete/{{ plane.id }}" class="card-link">Delete</a>
         </div>
         <div class="card-footer text-muted">
-            Last pilot to fly was {{ pilot.name }} on {{ plane.lastflight|date('Y-m-d') }}
+            Last pilot to fly was {{ pilot.name }} on {{ plane.lastflight|date('Y-m-d H:i:s') }}
         </div>
     </div>
 {% endblock %}
