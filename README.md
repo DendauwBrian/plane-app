@@ -1,6 +1,13 @@
-#Plane CRUD App
+# Plane CRUD App
 
-##Installation
+## About
+
+A simple application made in Symfony using an MySQL database. 
+You can create pilots and planes. Let pilots fly with planes. 
+
+This was made to understand Symfony4, Doctrine and Twig and enhance my own skills.
+
+## Installation
 
 ```
 git clone
