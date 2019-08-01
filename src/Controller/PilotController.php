@@ -32,7 +32,7 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/retired-pilots", name="retired-pilots");
+     * @Route("/pilots/retired", name="retired-pilots");
      */
     public function retiredIndex()
     {
@@ -124,7 +124,19 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/pilot/{id}", name="single-pilot");
+     * @Route("/pilot/retire", name="retire-pilot");
+     */
+    public function retireList()
+    {
+        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 0));
+
+        return $this->render('pilots/retire.html.twig', [
+            "pilots" => $pilots
+        ]);
+    }
+
+    /**
+     * @Route("/pilot/details/{id}", name="single-pilot");
      */
     public function details(int $id)
     {
@@ -142,18 +154,6 @@ class PilotController extends AbstractController
             'pilot' => $pilot,
             'timesFlown' => $timesFlown,
             "plane" => $lastPlane
-        ]);
-    }
-
-    /**
-     * @Route("/retire-pilot", name="retire-pilot");
-     */
-    public function retireList()
-    {
-        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 0));
-
-        return $this->render('pilots/retire.html.twig', [
-            "pilots" => $pilots
         ]);
     }
 
