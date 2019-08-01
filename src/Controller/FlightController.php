@@ -67,6 +67,7 @@ class FlightController extends AbstractController
 
             $flight->setFlightts($dateTime);
             $flight->setPlane($plane);
+            $flight->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($flight);
@@ -85,7 +86,7 @@ class FlightController extends AbstractController
      */
     public function history()
     {
-        $flights = $this->getDoctrine()->getRepository(Flight::class)->findAll();
+        $flights = $this->getDoctrine()->getRepository(Flight::class)->findBy(array('user' => $this->getUser()));
 
         return $this->render("flights/history.html.twig", array(
             "flights" => $flights

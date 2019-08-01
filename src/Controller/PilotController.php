@@ -72,6 +72,7 @@ class PilotController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $pilot = $form->getData();
+            $pilot->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($pilot);
@@ -130,7 +131,8 @@ class PilotController extends AbstractController
      */
     public function retireList()
     {
-        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 0));
+        $user = $this->getUser();
+        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 0, 'user' => $user));
 
         return $this->render('pilots/retire.html.twig', [
             "pilots" => $pilots
