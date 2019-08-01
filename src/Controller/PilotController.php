@@ -23,7 +23,8 @@ class PilotController extends AbstractController
      */
     public function index()
     {
-        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 0));
+        $user = $this->getUser();
+        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 0, 'user' => $user));
 
         return $this->render('pilots/index.html.twig', [
             "retired_view" => false,
@@ -36,7 +37,8 @@ class PilotController extends AbstractController
      */
     public function retiredIndex()
     {
-        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 1));
+        $user = $this->getUser();
+        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 1, 'user' => $user));
 
         return $this->render('pilots/index.html.twig', [
             "retired_view" => true,
