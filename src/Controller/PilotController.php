@@ -23,7 +23,8 @@ class PilotController extends AbstractController
      */
     public function index()
     {
-        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 0));
+        $user = $this->getUser();
+        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 0, 'user' => $user));
 
         return $this->render('pilots/index.html.twig', [
             "retired_view" => false,
@@ -32,11 +33,12 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/retired-pilots", name="retired-pilots");
+     * @Route("/pilots/retired", name="retired-pilots");
      */
     public function retiredIndex()
     {
-        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 1));
+        $user = $this->getUser();
+        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 1, 'user' => $user));
 
         return $this->render('pilots/index.html.twig', [
             "retired_view" => true,
@@ -70,6 +72,7 @@ class PilotController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $pilot = $form->getData();
+            $pilot->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($pilot);
@@ -124,7 +127,20 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/pilot/{id}", name="single-pilot");
+     * @Route("/pilot/retire", name="retire-pilot");
+     */
+    public function retireList()
+    {
+        $user = $this->getUser();
+        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 0, 'user' => $user));
+
+        return $this->render('pilots/retire.html.twig', [
+            "pilots" => $pilots
+        ]);
+    }
+
+    /**
+     * @Route("/pilot/details/{id}", name="single-pilot");
      */
     public function details(int $id)
     {
@@ -142,18 +158,6 @@ class PilotController extends AbstractController
             'pilot' => $pilot,
             'timesFlown' => $timesFlown,
             "plane" => $lastPlane
-        ]);
-    }
-
-    /**
-     * @Route("/retire-pilot", name="retire-pilot");
-     */
-    public function retireList()
-    {
-        $pilots = $this->getDoctrine()->getRepository(Pilot::class)->findBy(array('retired' => 0));
-
-        return $this->render('pilots/retire.html.twig', [
-            "pilots" => $pilots
         ]);
     }
 

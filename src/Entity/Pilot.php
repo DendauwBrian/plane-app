@@ -48,6 +48,12 @@ class Pilot
      */
     private $flights;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="pilots")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->flights = new ArrayCollection();
@@ -152,6 +158,18 @@ class Pilot
                 $flight->setPilot(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

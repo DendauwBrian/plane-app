@@ -3,9 +3,19 @@
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="/pilots" class="nav-link">Pilots</a></li>
-            <li class="nav-item"><a href="/planes" class="nav-link">Planes</a></li>
-            <li class="nav-item"><a href="/flights" class="nav-link">Flights</a></li>
+            {% if is_granted('ROLE_USER') %}
+                <li class="nav-item"><a href="/pilots" class="nav-link">Pilots</a></li>
+                <li class="nav-item"><a href="/planes" class="nav-link">Planes</a></li>
+                <li class="nav-item"><a href="/flights" class="nav-link">Flights</a></li>
+            {% endif %}
+        </ul>
+        <ul class="navbar-nav my-1">
+            {% if is_granted('ROLE_USER') %}
+                <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+            {% else %}
+                <li class='nav-item'><a href="/register" class="nav-link">Register</a></li>
+                <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+            {% endif %}
         </ul>
     </div>
 </nav>
