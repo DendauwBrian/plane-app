@@ -54,6 +54,16 @@ class Pilot
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Country;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Hometown;
+
     public function __construct()
     {
         $this->flights = new ArrayCollection();
@@ -170,6 +180,30 @@ class Pilot
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->Country;
+    }
+
+    public function setCountry(?string $Country): self
+    {
+        $this->Country = $Country;
+
+        return $this;
+    }
+
+    public function getHometown(): ?string
+    {
+        return $this->Hometown;
+    }
+
+    public function setHometown(?string $Hometown): self
+    {
+        $this->Hometown = $Hometown;
 
         return $this;
     }

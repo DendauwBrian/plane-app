@@ -57,6 +57,8 @@ class PilotController extends AbstractController
         $form = $this->createFormBuilder($pilot)
             ->add("firstname", TextType::class, array('attr' => array("class" => "form-control")))
             ->add("lastname", TextType::class, array('attr' => array("class" => "form-control")))
+            ->add("country", TextType::class, array('attr' => array("class" => "form-control")))
+            ->add("hometown", TextType::class, array('attr' => array("class" => "form-control")))
             ->add("age", IntegerType::class, array('attr' => array("class" => "form-control", "min" => 18, "max" => 65)))
             ->add("rank", ChoiceType::class, array('choices' => array(
                 "Private" => "Private",
