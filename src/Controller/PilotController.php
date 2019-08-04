@@ -7,6 +7,7 @@ use App\Entity\Pilot;
 use App\Entity\Flight;
 use App\Entity\Plane;
 
+use App\Form\PilotFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,29 +54,8 @@ class PilotController extends AbstractController
     public function create(Request $request)
     {
         $pilot = new Pilot();
-
-        $form = $this->createFormBuilder($pilot)
-            ->add("firstname", TextType::class, array('attr' => array("class" => "form-control")))
-            ->add("lastname", TextType::class, array('attr' => array("class" => "form-control")))
-            ->add("country", ChoiceType::class, array('choices' => array(
-                "Unknown" => "Unknown",
-                "United Kingdom" => "United Kingdom",
-                "United States of America" => "United States of America",
-                "France" => "France",
-                "Belgium" => "Belgium",
-                "Russia" => "Russia"
-            ), 'attr' => array("class" => "form-control")))
-            ->add("hometown", TextType::class, array('attr' => array("class" => "form-control")))
-            ->add("age", IntegerType::class, array('attr' => array("class" => "form-control", "min" => 18, "max" => 65)))
-            ->add("rank", ChoiceType::class, array('choices' => array(
-                "Private" => "Private",
-                "Flight Engineer" => "Flight Engineer",
-                "Second Officer" => "Second Officer",
-                "First Officer" => "First Officer",
-                "Captain" => "Captain"
-            ), 'attr' => array("class" => "form-control")))
-            ->add("save", SubmitType::class, array('label' => 'Create', 'attr' => array("class" => "btn btn-primary")))
-            ->getForm();
+        $form = $this->createForm(PilotFormType::class, $pilot);
+        $form->add("save", SubmitType::class, array('label' => 'Create', 'attr' => array("class" => "btn btn-primary")));
 
         $form->handleRequest($request);
 
@@ -102,33 +82,8 @@ class PilotController extends AbstractController
     {
         $pilot = new Pilot();
         $pilot = $this->getDoctrine()->getRepository(Pilot::class)->find($id);
-
-        $form = $this->createFormBuilder($pilot)
-            ->add("firstname", TextType::class, array('attr' => array("class" => "form-control")))
-            ->add("lastname", TextType::class, array('attr' => array("class" => "form-control")))
-            ->add("country", ChoiceType::class, array('choices' => array(
-                "Unknown" => "Unknown",
-                "United Kingdom" => "United Kingdom",
-                "United States of America" => "United States of America",
-                "France" => "France",
-                "Belgium" => "Belgium",
-                "Russia" => "Russia"
-            ), 'attr' => array("class" => "form-control")))
-            ->add("hometown", TextType::class, array('attr' => array("class" => "form-control")))
-            ->add("age", IntegerType::class, array('attr' => array("class" => "form-control", "min" => 18, "max" => 65)))
-            ->add("rank", ChoiceType::class, array('choices' => array(
-                "Private" => "Private",
-                "Flight Engineer" => "Flight Engineer",
-                "Second Officer" => "Second Officer",
-                "First Officer" => "First Officer",
-                "Captain" => "Captain"
-            ), 'attr' => array("class" => "form-control")))
-            ->add("retired", ChoiceType::class, array('choices' => array(
-                "False" => false,
-                "True" => true
-            ), 'attr' => array("class" => "form-control")))
-            ->add("save", SubmitType::class, array('label' => 'Save', 'attr' => array("class" => "btn btn-primary")))
-            ->getForm();
+        $form = $this->createForm(PilotFormType::class, $pilot);
+        $form->add("save", SubmitType::class, array('label' => 'Save', 'attr' => array("class" => "btn btn-primary")));
 
         $form->handleRequest($request);
 
