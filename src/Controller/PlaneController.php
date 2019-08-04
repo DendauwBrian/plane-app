@@ -28,7 +28,7 @@ class PlaneController extends AbstractController
     }
 
     /**
-     * @Route("/plane/new", name="newplane");
+     * @Route("/plane/new", name="newPlane");
      */
     public function create(Request $request)
     {
@@ -68,7 +68,7 @@ class PlaneController extends AbstractController
     }
 
     /**
-     * @Route("/plane/{id}", name="singleplane")
+     * @Route("/plane/details/{id}", name="detailsOfAPlane")
      */
     public function detail(int $id)
     {
@@ -90,7 +90,7 @@ class PlaneController extends AbstractController
     }
 
     /**
-     * @Route("/plane/decommission/{id}", name="decommissionplane")
+     * @Route("/plane/decommission/{id}", name="decommissionPlane")
      */
     public function decommission(int $id)
     {
@@ -105,7 +105,7 @@ class PlaneController extends AbstractController
     }
 
     /**
-     * @Route("/plane/edit/{id}", name="editplane");
+     * @Route("/plane/edit/{id}", name="editPlane");
      */
     public function edit(Request $request, int $id)
     {

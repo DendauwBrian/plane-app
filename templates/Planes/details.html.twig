@@ -15,8 +15,8 @@
             <li class="list-group-item">Has {{ timesFlown }} recorded flights.</li>
         </ul>
         <div class="card-body">
-            <a href="/plane/edit/{{ plane.id }}" class="card-link">Edit</a>
-            <a href="/plane/decommission/{{ plane.id }}" class="card-link">Decommission</a>
+            <a href="{{ url('editPlane', {'id': plane.id }) }}" class="card-link">Edit</a>
+            <a href="{{ url('decommissionPlane', {'id': plane.id })}}" class="card-link">Decommission</a>
         </div>
         {% if timesFlown %}
             <div class="card-footer text-muted">

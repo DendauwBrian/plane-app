@@ -4,7 +4,7 @@
     <h1>Planes</h1>
     <hr/>
     <div>
-        <a href="/plane/new">Create a new Plane</a>
+        <a href="{{ url('newPlane') }}">Create a new Plane</a>
     </div>
     <hr/>
 
@@ -25,12 +25,12 @@
                     <td>{{ plane.model }}</td>
                     <td>{{ plane.manufacturer }}</td>
                     <td>{%  if plane.decommissioned %} Decommisioned {% else %} Available {% endif %}</td>
-                    <td><a href="/plane/{{ plane.id }}" class="btn btn-dark">Show</a></td>
+                    <td><a href="{{ url('detailsOfAPlane', {'id': plane.id })}}" class="btn btn-dark">Show</a></td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     {% else %}
-        <p>There are no planes available. Try <a href="/create-plane">making a new one</a>.</p>
+        <p>There are no planes available. Try <a href="{{ url('newPlane') }}">making a new one</a>.</p>
     {% endif %}
 {% endblock %}
