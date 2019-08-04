@@ -5,17 +5,12 @@ namespace App\Controller;
 
 use App\Entity\Pilot;
 use App\Entity\Flight;
-use App\Entity\Plane;
 
 use App\Form\PilotFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class PilotController extends AbstractController
 {

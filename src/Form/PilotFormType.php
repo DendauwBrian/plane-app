@@ -20,12 +20,11 @@ class PilotFormType extends AbstractType
             ->add("firstname", TextType::class, array('attr' => array("class" => "form-control")))
             ->add("lastname", TextType::class, array('attr' => array("class" => "form-control")))
             ->add("country", ChoiceType::class, array('choices' => array(
-                "Unknown" => "Unknown",
-                "United Kingdom" => "United Kingdom",
-                "United States of America" => "United States of America",
-                "France" => "France",
-                "Belgium" => "Belgium",
-                "Russia" => "Russia"
+                "United Kingdom" => "gb",
+                "United States of America" => "us",
+                "France" => "fr",
+                "Belgium" => "be",
+                "Russia" => "ru"
             ), 'attr' => array("class" => "form-control")))
             ->add("hometown", TextType::class, array('attr' => array("class" => "form-control")))
             ->add("age", IntegerType::class, array('attr' => array("class" => "form-control", "min" => 18, "max" => 65)))

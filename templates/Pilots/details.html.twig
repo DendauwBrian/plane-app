@@ -2,7 +2,9 @@
 
 {% block body %}
     <div class="card mb-3">
-        <h3 class="card-header">{{ pilot.rank }} {{ pilot.lastname }}</h3>
+        <h3 class="card-header">
+            <img class="card-subtitle" style="margin-right: 1%;" src="https://www.countryflags.io/{{ pilot.country }}/shiny/32.png">{{ pilot.rank }} {{ pilot.lastname }}
+        </h3>
         <div class="card-body">
             <h5 class="card-title">{{ pilot.rank }}</h5>
             <h6 class="card-subtitle text-muted">{{ pilot.firstname }} {{ pilot.lastname }}</h6>
