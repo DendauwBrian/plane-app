@@ -16,7 +16,7 @@
             {% for flight in flights %}
                 <tr>
                     <td>{{ flight.flightts|date('Y-m-d H:i:s')  }}</td>
-                    <td><a href="/flight/detail/{{ flight.id }}" class="btn btn-dark">Show</a></td>
+                    <td><a href="{{ url('flightdetails', {'id': flight.id} ) }}" class="btn btn-dark">Show</a></td>
                 </tr>
             {% endfor %}
             </tbody>

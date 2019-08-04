@@ -25,7 +25,7 @@ class FlightController extends AbstractController
     }
 
     /**
-     * @Route("/flight/new", name="newflight");
+     * @Route("/flight/new", name="newFlight");
      * Method({"GET", "POST"})
      */
     public function create(Request $request)
