@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Training Center{% endblock %}
+
+{% block body %}
+    <h1>Training Center</h1>
+    <p>Welcome to the training center, here you can train your pilots to become better.</p>
+
+    <div class="row">
+        {% for pilot in pilots %}
+            <div class="col-lg-4">
+                {% include 'Other/pilotcard.html.twig' with {'pilot': pilot} %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
