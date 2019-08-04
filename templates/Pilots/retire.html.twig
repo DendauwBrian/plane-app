@@ -20,7 +20,7 @@
                     <td>{{ pilot.lastname }}</td>
                     <td>{{ pilot.rank }}</td>
                     <td>{{ pilot.age }}</td>
-                    <td><a href="/pilot/retire/{{ pilot.id }}" class="btn btn-dark">Retire</a></td>
+                    <td><a href="{{ url('retireSinglePilot', {'id': pilot.id}) }}" class="btn btn-dark">Retire</a></td>
                 </tr>
             {% endfor %}
             </tbody>

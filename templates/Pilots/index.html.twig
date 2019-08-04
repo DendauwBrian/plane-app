@@ -4,7 +4,7 @@
     <h1 class="h1">Pilots</h1>
     <hr/>
     <div>
-        <a href="/pilot/new">Create a new Pilot</a> | <a href="/pilot/retire">Retire an active Pilot</a>
+        <a href="{{ url('newPilot') }}">Create a new Pilot</a> | <a href="{{ url('retireAPilot') }}">Retire an active Pilot</a>
     </div>
     <hr/>
 
@@ -26,14 +26,14 @@
                         <td>{{ pilot.firstname }}</td>
                         <td>{{ pilot.lastname }}</td>
                         <td>{{ pilot.rank }}</td>
-                        <td><a href="/pilot/details/{{ pilot.id }}" class="btn btn-dark">Show</a></td>
+                        <td><a href="{{ url('detailsOfAPilot', {'id': pilot.id}) }}" class="btn btn-dark">Show</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-            <p>See <a href="/pilots">active pilots</a>.</p>
+            <p>See <a href="{{ url('pilots') }}">active pilots</a>.</p>
         {% else %}
-            <p>There are no retired pilots. See <a href="/pilots">active pilots</a>.</p>
+            <p>There are no retired pilots. See <a href="{{ url('pilots') }}">active pilots</a>.</p>
         {% endif %}
     {% else %}
         <h2>Current active Pilots</h2>
@@ -53,14 +53,14 @@
                         <td>{{ pilot.firstname }}</td>
                         <td>{{ pilot.lastname }}</td>
                         <td>{{ pilot.rank }}</td>
-                        <td><a href="/pilot/details/{{ pilot.id }}" class="btn btn-dark">Show</a></td>
+                        <td><a href="{{ url('detailsOfAPilot', {'id': pilot.id}) }}" class="btn btn-dark">Show</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-            <p>See <a href="/pilots/retired">retired pilots</a>.</p>
+            <p>See <a href="{{ url('retiredPilots') }}">retired pilots</a>.</p>
         {% else %}
-            <p>There are no active pilots. See <a href="/pilots/retired">retired pilots</a>.</p>
+            <p>There are no active pilots. See <a href="{{ url('retiredPilots') }}">retired pilots</a>.</p>
         {% endif %}
     {% endif %}
 {% endblock %}

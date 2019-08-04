@@ -17,7 +17,7 @@
             <li class="list-group-item">Has {{ timesFlown }} recorded flights.</li>
         </ul>
         <div class="card-body">
-            <a href="/pilot/edit/{{ pilot.id }}" class="card-link">Edit</a>
+            <a href="{{ url('editAPilot', {'id': pilot.id}) }}" class="card-link">Edit</a>
         </div>
         {% if timesFlown %}
             <div class="card-footer text-muted">

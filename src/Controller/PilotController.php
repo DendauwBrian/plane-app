@@ -29,7 +29,7 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/pilots/retired", name="retired-pilots");
+     * @Route("/pilots/retired", name="retiredPilots");
      */
     public function retiredIndex()
     {
@@ -43,7 +43,7 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/pilot/new", name="newpilot");
+     * @Route("/pilot/new", name="newPilot");
      * Method({"GET", "POST"})
      */
     public function create(Request $request)
@@ -71,7 +71,7 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/pilot/edit/{id}", name="edit-pilot");
+     * @Route("/pilot/edit/{id}", name="editAPilot");
      */
     public function edit(Request $request, int $id)
     {
@@ -95,7 +95,7 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/pilot/retire", name="retire-pilot");
+     * @Route("/pilot/retire", name="retireAPilot");
      */
     public function retireList()
     {
@@ -108,7 +108,7 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("/pilot/details/{id}", name="single-pilot");
+     * @Route("/pilot/details/{id}", name="detailsOfAPilot");
      */
     public function details(int $id)
     {
@@ -130,7 +130,7 @@ class PilotController extends AbstractController
     }
 
     /**
-     * @Route("pilot/retire/{id}", name="retire-single-pilot")
+     * @Route("pilot/retire/{id}", name="retireSinglePilot")
      */
     public function retire(int $id)
     {
