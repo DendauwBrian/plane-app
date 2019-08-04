@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrainingController extends AbstractController
 {
     /**
-     * @Route("/training", name="training-home")
+     * @Route("/training", name="training")
      */
     public function index()
     {
@@ -19,5 +19,16 @@ class TrainingController extends AbstractController
         return $this->render('training/index.html.twig', [
             'pilots' => $pilots,
         ]);
+    }
+
+    /**
+     * @Route("/training/train/{id}", name="trainAPilot")
+     */
+    public function train($id)
+    {
+        return $this->render('training/train.html.twig', [
+            'pilot' => $id,
+        ]);
+
     }
 }
