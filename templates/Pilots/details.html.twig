@@ -14,7 +14,7 @@
             <p class="card-text">Retired: {% if  pilot.retired %} Yes{% else %} No{% endif %}.</p>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Has {{ timesFlown }} recorded flights.</li>
+            <li class="list-group-item">Has {{ timesFlown }} recorded flight{% if timesFlown != 1 %}s{% endif %}.</li>
         </ul>
         <div class="card-body">
             <a href="{{ url('editAPilot', {'id': pilot.id}) }}" class="card-link">Edit</a>
