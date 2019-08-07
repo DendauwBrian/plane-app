@@ -29,11 +29,6 @@ class Pilot
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $rank;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $age;
@@ -63,6 +58,12 @@ class Pilot
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $Hometown;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Rank", inversedBy="pilots")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $rank;
 
     public function __construct()
     {
@@ -98,17 +99,6 @@ class Pilot
         return $this;
     }
 
-    public function getRank(): ?string
-    {
-        return $this->rank;
-    }
-
-    public function setRank(string $rank): self
-    {
-        $this->rank = $rank;
-
-        return $this;
-    }
 
     public function getAge(): ?int
     {
@@ -204,6 +194,18 @@ class Pilot
     public function setHometown(?string $Hometown): self
     {
         $this->Hometown = $Hometown;
+
+        return $this;
+    }
+
+    public function getRank(): ?Rank
+    {
+        return $this->rank;
+    }
+
+    public function setRank(?Rank $rank): self
+    {
+        $this->rank = $rank;
 
         return $this;
     }
