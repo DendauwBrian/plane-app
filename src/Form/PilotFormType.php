@@ -5,6 +5,8 @@ namespace App\Form;
 
 
 use App\Entity\Pilot;
+use App\Entity\Rank;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -28,13 +30,10 @@ class PilotFormType extends AbstractType
             ), 'attr' => array("class" => "form-control")))
             ->add("hometown", TextType::class, array('attr' => array("class" => "form-control")))
             ->add("age", IntegerType::class, array('attr' => array("class" => "form-control", "min" => 18, "max" => 65)))
-            ->add("rank", ChoiceType::class, array('choices' => array(
-                "Private" => "Private",
-                "Flight Engineer" => "Flight Engineer",
-                "Second Officer" => "Second Officer",
-                "First Officer" => "First Officer",
-                "Captain" => "Captain"
-            ), 'attr' => array("class" => "form-control")));
+            ->add("rank", EntityType::class, array(
+                'class' =>  Rank::class,
+                'choice_label' => 'Title',
+                'attr' => array("class" => "form-control")));
     }
 
     public function configureOptions(OptionsResolver $resolver)

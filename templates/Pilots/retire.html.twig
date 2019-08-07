@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{ pilot.firstname }}</td>
                     <td>{{ pilot.lastname }}</td>
-                    <td>{{ pilot.rank }}</td>
+                    <td>{{ pilot.rank.title }}</td>
                     <td>{{ pilot.age }}</td>
                     <td><a href="{{ url('retireSinglePilot', {'id': pilot.id}) }}" class="btn btn-dark">Retire</a></td>
                 </tr>

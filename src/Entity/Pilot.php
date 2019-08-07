@@ -126,7 +126,7 @@ class Pilot
 
     public function getFullName()
     {
-        return $this->getRank() . ' '
+        return $this->getRank()->getTitle() . ' '
             . $this->getFirstname() . ' '
             . $this->getLastname();
     }
